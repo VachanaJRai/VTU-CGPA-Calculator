@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form action="{% url 'calculate_sgpa' %}" method="post">
+    {% csrf_token %}
+    {% for i in 1|range:9 %}
+      <label for="credit_{{ i }}">Enter credits for subject {{ i }}:</label>
+      <input type="number" name="credit_{{ i }}" id="credit_{{ i }}" required><br>
+      <label for="grade_{{ i }}">Enter grade for subject {{ i }}:</label>
+      <select name="grade_{{ i }}" id="grade_{{ i }}" required>
+        <option value="O">O</option>
+        <option value="A+">A+</option>
+        <option value="A">A</option>
+        <option value="B+">B+</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="P">P</option>
+        <option value="F">F</option>
+        <option value="Ab">Ab</option>
+        <option value="I">I</option>
+      </select><br>
+    {% endfor %}
+    <button type="submit">Calculate SGPA</button>
+  </form>
+{% endblock %}
+
